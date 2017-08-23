@@ -9,69 +9,84 @@ import javax.persistence.Table;
 @Table(name = "tb_item_cat")
 public class ItemCat extends BasePojo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;		//类目ID
 
-    @Column(name = "parent_id")
-    private Long parentId;
+	@Column(name = "parent_id")
+	private Long parentId;		//父类目ID=0时，代表的是一级的类目
 
-    private String name;
+	private String name;	//类目名称
 
-    private Integer status;
+	private Integer status;		//状态。可选值:1(正常),2(删除)
 
-    @Column(name = "sort_order")
-    private Integer sortOrder;
+	@Column(name = "sort_order")	
+	private Integer sortOrder;		//排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
 
-    @Column(name = "is_parent")
-    private Boolean isParent;
+	@Column(name = "is_parent")
+	private Boolean isParent;		//该类目是否为父类目，1为true，0为false
 
-    public Long getId() {
-        return id;
-    }
+	// 将名称设置到树的控件中
+	public String getText() {
+		return this.getName();
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	// 判断节点是不是父节点,如果是父节点就展开(open),是子节点就(closed)
+	public String getState() {
+		return this.isParent ? "closed" : "open";
+	}
 
-    public Long getParentId() {
-        return parentId;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Long getParentId() {
+		return parentId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Integer getSortOrder() {
-        return sortOrder;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setSortOrder(Integer sortOrder) {
-        this.sortOrder = sortOrder;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public Boolean getIsParent() {
-        return isParent;
-    }
+	public Integer getSortOrder() {
+		return sortOrder;
+	}
 
-    public void setIsParent(Boolean isParent) {
-        this.isParent = isParent;
-    }
+	public void setSortOrder(Integer sortOrder) {
+		this.sortOrder = sortOrder;
+	}
 
+	public Boolean getIsParent() {
+		return isParent;
+	}
+
+	public void setIsParent(Boolean isParent) {
+		this.isParent = isParent;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemCat [id=" + id + ", parentId=" + parentId + ", name=" + name + ", status=" + status + ", sortOrder="
+				+ sortOrder + ", isParent=" + isParent + "]";
+	}
 }

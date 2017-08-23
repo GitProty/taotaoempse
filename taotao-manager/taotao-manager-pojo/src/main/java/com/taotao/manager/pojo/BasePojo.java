@@ -5,9 +5,9 @@ import java.util.Date;
 
 public abstract class BasePojo  implements Serializable {
 
-    private Date created;
+    private Date created;	//创建时间
 
-    private Date updated;
+    private Date updated;	//更新时间
 
     public Date getCreated() {
         return created;

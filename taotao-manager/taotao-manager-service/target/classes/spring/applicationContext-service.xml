@@ -30,5 +30,10 @@
 		ref="testServiceImpl" />
 	<dubbo:service interface="com.taotao.manager.service.ItemCatService"
 		ref="itemCatServiceImpl" />
-
+	<!-- 商品信息 -->
+	<dubbo:service interface="com.taotao.manager.service.ItemService"
+		ref="itemServiceImpl" />
+	<!-- 商品描述 -->
+	<dubbo:service interface="com.taotao.manager.service.ItemDescService"
+		ref="itemDescServiceImpl" />
 </beans>

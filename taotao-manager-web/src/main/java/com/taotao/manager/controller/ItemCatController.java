@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,9 +19,18 @@ public class ItemCatController {
 	@Autowired
 	private ItemCatService itemCatService;
 
-	@RequestMapping("query/{page}")
+	// url:'/rest/item/cat'
+	// method:'GET',
+	/**
+	 * 通过id查询商品类目
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public List<ItemCat> queryItemCatByPage(@PathVariable("page") Integer page, @RequestParam("rows") Integer rows) {
-		return itemCatService.queryItemCatByPage(page, rows);
+	public List<ItemCat> queryItemCatByParentId(@RequestParam(value = "id",defaultValue = "0") Long parentId) {
+		
+		List<ItemCat> list = itemCatService.queryItemCatByParentId(parentId);
+		
+		return list;
 	}
 }
